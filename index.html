@@ -22,7 +22,8 @@
   .hero .bg-fallback{position:absolute;inset:0}
   .hero .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .hero .overlay{position:absolute;inset:0;background:rgba(0,0,0,.35)}
-  .hero .center{position:relative;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px}
+  /* ⬇️ 히어로 문구 하단 배치(요청 반영) */
+  .hero .center{position:relative;height:100%;display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:0 24px 36px}
   h1{font-size:40px;font-weight:800;line-height:1.1}@media(min-width:960px){h1{font-size:56px}}
   h2{font-size:32px;font-weight:800;margin:0 0 16px}@media(min-width:960px){h2{font-size:40px}}
   .panel-img{height:180px;border-bottom:1px solid var(--line);background:linear-gradient(135deg, rgba(124,58,237,.3), rgba(37,99,235,.3))}
@@ -70,7 +71,7 @@
     <h2>솔루션</h2>
     <div class="grid g-3">
 
-      <!-- GL: start solution images Type2 (배경 이미지 + 오버레이 텍스트) -->
+      <!-- 기존 솔루션 카드 (그대로) -->
       <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
         <img src="solution-club.jpg" alt="EDM 공연장 조명" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
         <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
@@ -124,62 +125,47 @@
           <p class="muted" style="color:#f3f4f6;">행사/프로모션 장비 패키지 및 운영</p>
         </div>
       </div>
-      <!-- GL: end solution images Type2 -->
 
     </div>
   </div>
 </section>
-
-
 
 <section id="projects" class="section--alt" aria-labelledby="sec-proj">
   <div class="container">
     <h2 id="sec-proj">포트폴리오</h2>
     <div class="grid g-3">
 
-      <!-- GL: start portfolio images large -->
-      <div class="card" style="position:relative;overflow:hidden;padding:0;
-           color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);height:400px;">
-        <img src="arena.jpg" alt="서울 아레나 무대"
-             style="position:absolute;inset:0;width:100%;height:100%;
-                    object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px;">
+      <!-- ⬇️ 원래 비율/크기 표시(요청 반영) -->
+      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);">
+        <img src="arena.jpg" alt="서울 아레나 무대" style="width:100%;height:auto;display:block;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
           <h3 style="margin:0 0 6px">서울 아레나</h3>
           <div class="muted">1,280기 · 유니버스24 · 조도 평균 1200lx</div>
         </div>
       </div>
 
-      <div class="card" style="position:relative;overflow:hidden;padding:0;
-           color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);height:400px;">
-        <img src="club.jpg" alt="메가클럽 X 무대"
-             style="position:absolute;inset:0;width:100%;height:100%;
-                    object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px;">
+      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);">
+        <img src="club.jpg" alt="메가클럽 X 무대" style="width:100%;height:auto;display:block;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
           <h3 style="margin:0 0 6px">메가클럽 X</h3>
           <div class="muted">픽셀 30,000노드 · 타임코드 쇼</div>
         </div>
       </div>
 
-      <div class="card" style="position:relative;overflow:hidden;padding:0;
-           color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);height:400px;">
-        <img src="church.jpg" alt="교회 조명"
-             style="position:absolute;inset:0;width:100%;height:100%;
-                    object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px;">
+      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);">
+        <img src="church.jpg" alt="교회 조명" style="width:100%;height:auto;display:block;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
           <h3 style="margin:0 0 6px">○○교회</h3>
           <div class="muted">방송/현장 겸용 · 4300K</div>
         </div>
       </div>
-      <!-- GL: end portfolio images large -->
 
     </div>
   </div>
 </section>
-
-
 
 <section id="process" class="section">
   <div class="container">
@@ -201,9 +187,19 @@
       <h2>장비 · 제품</h2><a class="btn-ghost" href="#downloads">카탈로그</a>
     </div>
     <div class="grid g-3" style="margin-top:16px">
-      <div class="card" style="padding:0;overflow:hidden"><div class="panel-img"></div><div style="padding:20px"><h3>무빙라이트</h3><ul class="muted"><li>Beam/Spot/Wash</li><li>Art-Net/sACN/DMX</li><li>16bit 디밍</li></ul></div></div>
-      <div class="card" style="padding:0;overflow:hidden"><div class="panel-img"></div><div style="padding:20px"><h3>LED 픽셀 시스템</h3><ul class="muted"><li>픽셀바/패널/튜브</li><li>매핑 소프트웨어</li><li>KC 인증 모델</li></ul></div></div>
-      <div class="card" style="padding:0;overflow:hidden"><div class="panel-img"></div><div style="padding:20px"><h3>특수효과 장비</h3><ul class="muted"><li>스트로브/레이저</li><li>헤이저/로우포그</li><li>CO₂/콜드스파크</li></ul></div></div>
+      <!-- ⬇️ 장비·제품 이미지 삽입 가능(요청 반영) -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="product-moving.jpg" alt="무빙라이트 (Beam/Spot/Wash)" style="width:100%;height:220px;object-fit:cover;border-bottom:1px solid var(--line);">
+        <div style="padding:20px"><h3>무빙라이트</h3><ul class="muted"><li>Beam/Spot/Wash</li><li>Art-Net/sACN/DMX</li><li>16bit 디밍</li></ul></div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="product-pixel.jpg" alt="LED 픽셀 시스템 (바/패널/튜브)" style="width:100%;height:220px;object-fit:cover;border-bottom:1px solid var(--line);">
+        <div style="padding:20px"><h3>LED 픽셀 시스템</h3><ul class="muted"><li>픽셀바/패널/튜브</li><li>매핑 소프트웨어</li><li>KC 인증 모델</li></ul></div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <img src="product-fx.jpg" alt="특수효과 장비 (스트로브/레이저/헤이저/로우포그/콜드스파크)" style="width:100%;height:220px;object-fit:cover;border-bottom:1px solid var(--line);">
+        <div style="padding:20px"><h3>특수효과 장비</h3><ul class="muted"><li>스트로브/레이저</li><li>헤이저/로우포그</li><li>CO₂/콜드스파크</li></ul></div>
+      </div>
     </div>
   </div>
 </section>
@@ -237,7 +233,7 @@
     <h2>자료실</h2>
     <div class="grid g-3">
       <div class="card"><div class="font-semibold">매뉴얼 & DMX 시트</div><ul class="muted"><li>GL Beam 300 – 매뉴얼 (KR/EN)</li><li>GL PixelBar 64 – DMX 맵</li><li>GL Hazer Pro – 사용설명서</li></ul></div>
-      <div class="card"><div class="font-semibold">FAQ</div><ul class="muted"><li>DMX vs Art‑Net: 확장/백업은 네트워크 방식이 유리</li><li>KC 인증: 상설 설치·판매에 필요, 당사는 인증 모델만 제안</li><li>교육 기간: 기본 1일(현장 맞춤), 심화 과정 선택</li></ul></div>
+      <div class="card"><div class="font-semibold">FAQ</div><ul class="muted"><li>DMX vs Art-Net: 확장/백업은 네트워크 방식이 유리</li><li>KC 인증: 상설 설치·판매에 필요, 당사는 인증 모델만 제안</li><li>교육 기간: 기본 1일(현장 맞춤), 심화 과정 선택</li></ul></div>
       <div class="card"><div class="font-semibold">인증서 (KC/CE/RoHS)</div><ul class="muted"><li>무빙라이트 KC 적합성</li><li>픽셀바 CE 적합성</li><li>헤이저 RoHS 준수</li></ul></div>
     </div>
   </div>
