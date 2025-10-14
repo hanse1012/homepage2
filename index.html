@@ -6,167 +6,205 @@
 <title>그리드라이트 · 무대/특수조명 시공</title>
 <meta name="description" content="빛을 설계하다, 무대를 완성하다. 설계→시공→교육→A/S 2년. 공연/방송/클럽/교회 검증.">
 <style>
-  :root{--bg:#000;--panel:rgba(255,255,255,.05);--line:rgba(255,255,255,.1);--muted:#a1a1aa;--brand:#7c3aed;}
-  *{box-sizing:border-box}body{margin:0;background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,Apple SD Gothic Neo,Malgun Gothic,Noto Sans KR,sans-serif}
-  a{color:inherit;text-decoration:none}.container{max-width:1200px;margin:0 auto;padding:0 24px}
-  header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  :root{
+    --bg:#000; --panel:rgba(255,255,255,.05); --line:rgba(255,255,255,.1);
+    --muted:#a1a1aa; --brand:#7c3aed;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#000;color:#fff;line-height:1.6;
+    font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  }
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* Header */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   header .inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-  nav a{margin:0 10px;color:#d1d5db}nav a:hover{color:#fff}
-  .btn{display:inline-block;padding:10px 16px;border-radius:12px;background:var(--brand)} .btn:hover{background:#6d28d9}
-  .btn-ghost{display:inline-block;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06)} .btn-ghost:hover{background:rgba(255,255,255,.12)}
-  section{scroll-margin-top:80px}.section{padding:80px 0}.grid{display:grid;gap:24px}
-  .g-3{grid-template-columns:1fr}@media(min-width:960px){.g-3{grid-template-columns:repeat(3,1fr)}}
-  .g-4{grid-template-columns:1fr}@media(min-width:960px){.g-4{grid-template-columns:repeat(4,1fr)}}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}.muted{color:var(--muted)}
-  .hero{position:relative;height:84vh;min-height:560px;overflow:hidden}
-  .hero .bg-fallback{position:absolute;inset:0}
-  .hero .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  nav a{margin:0 10px;color:#d1d5db;transition:.2s}
+  nav a:hover{color:#fff}
+  .btn{display:inline-block;padding:10px 16px;border-radius:12px;background:var(--brand);transition:.25s}
+  .btn:hover{background:#6d28d9}
+  .btn-ghost{display:inline-block;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);transition:.25s}
+  .btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+  /* Layout */
+  section{scroll-margin-top:80px}
+  .section{padding:80px 0}
+  .grid{display:grid;gap:24px}
+  .g-3{grid-template-columns:1fr}
+  @media(min-width:960px){.g-3{grid-template-columns:repeat(3,1fr)}}
+  .g-4{grid-template-columns:1fr}
+  @media(min-width:960px){.g-4{grid-template-columns:repeat(4,1fr)}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.3s}
+  .card:hover{background:rgba(255,255,255,.08);transform:translateY(-4px)}
+  .muted{color:var(--muted)}
+  h1,h2,h3{font-weight:800;line-height:1.2}
+  h1{font-size:40px}@media(min-width:960px){h1{font-size:56px}}
+  h2{font-size:32px;margin-bottom:16px}@media(min-width:960px){h2{font-size:40px}}
+  img{max-width:100%;display:block}
+
+  /* Hero */
+  .hero{position:relative;height:min(84vh,900px);min-height:560px;overflow:hidden}
+  .hero .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
   .hero .overlay{position:absolute;inset:0;background:rgba(0,0,0,.35)}
-  /* ⬇️ 히어로 문구 하단 배치(요청 반영) */
   .hero .center{position:relative;height:100%;display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:0 24px 36px}
-  h1{font-size:40px;font-weight:800;line-height:1.1}@media(min-width:960px){h1{font-size:56px}}
-  h2{font-size:32px;font-weight:800;margin:0 0 16px}@media(min-width:960px){h2{font-size:40px}}
-  .panel-img{height:180px;border-bottom:1px solid var(--line);background:linear-gradient(135deg, rgba(124,58,237,.3), rgba(37,99,235,.3))}
+
+  /* Footer */
   footer{border-top:1px solid var(--line)}
+
+  /* =========================
+     🔧 릴리즈 보강 CSS (추가)
+     ========================= */
+  /* 1) 히어로: 고정형 + 반응형 (큰 화면 비율 유지, 모바일 정상 표시, 문구 하단 고정) */
+  @media (min-width:1600px){
+    .hero{max-height:900px;margin:0 auto}
+  }
+
+  /* 2) 솔루션 카드: 이미지 오버레이 + hover 시 부드럽게 밝아짐 + 살짝 확대 */
+  #solutions .card{position:relative;overflow:hidden}
+  #solutions .card img{
+    transition:transform .6s ease, filter .6s ease, opacity .4s ease;
+    filter:brightness(.82); will-change:transform,filter;
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+  #solutions .card .overlay{
+    position:absolute; inset:0; background:rgba(0,0,0,.40); transition:background .4s ease;
+  }
+  #solutions .card:hover img{transform:scale(1.05); filter:brightness(1)}
+  #solutions .card:hover .overlay{background:rgba(0,0,0,.30)}
+  #solutions .card > div[style*="padding:20px"]{position:relative;z-index:2}
+
+  /* 3) 색감/가독성 보강 */
+  body{letter-spacing:.1px}
+  .muted{color:#b3b3bb}
+  .card{backdrop-filter:saturate(110%)}
+  #solutions .card h3{ text-shadow:0 2px 8px rgba(0,0,0,.7) }
+  #solutions .card p { text-shadow:0 2px 8px rgba(0,0,0,.6) }
+
+  /* 4) 모바일 대응 */
+  @media (max-width:599px){
+    .container{padding:0 16px}
+    .section{padding:64px 0}
+    #solutions .card:hover img{transform:none}
+  }
+
+  /* 5) 버튼 접근성(키보드 포커스) */
+  .btn,.btn-ghost{outline:none}
+  .btn:focus-visible,.btn-ghost:focus-visible{box-shadow:0 0 0 3px rgba(124,58,237,.35)}
 </style>
 </head>
 <body>
+
+<!-- Header -->
 <header>
   <div class="container inner">
     <div style="display:flex;align-items:center;gap:12px">
-      <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="none"/><g fill="#fff"><rect x='6' y='6' width='4' height='4' rx='1'/><rect x='14' y='6' width='4' height='4' rx='1'/><rect x='22' y='6' width='4' height='4' rx='1'/><rect x='6' y='14' width='4' height='4' rx='1'/><rect x='14' y='14' width='4' height='4' rx='1'/><rect x='22' y='14' width='4' height='4' rx='1'/><rect x='6' y='22' width='4' height='4' rx='1'/><rect x='14' y='22' width='4' height='4' rx='1'/><rect x='22' y='22' width='4' height='4' rx='1'/></g></svg>
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="none"/><g fill="#fff"><rect x="6" y="6" width="4" height="4" rx="1"/><rect x="14" y="6" width="4" height="4" rx="1"/><rect x="22" y="6" width="4" height="4" rx="1"/><rect x="6" y="14" width="4" height="4" rx="1"/><rect x="14" y="14" width="4" height="4" rx="1"/><rect x="22" y="14" width="4" height="4" rx="1"/><rect x="6" y="22" width="4" height="4" rx="1"/><rect x="14" y="22" width="4" height="4" rx="1"/><rect x="22" y="22" width="4" height="4" rx="1"/></g></svg>
       <strong>그리드라이트</strong>
     </div>
     <nav>
-      <a href="#home">홈</a><a href="#solutions">솔루션</a><a href="#projects">포트폴리오</a><a href="#process">시공 프로세스</a><a href="#products">장비·제품</a><a href="#services">교육·오퍼레이션</a><a href="#support">A/S·보증</a><a href="#downloads">리소스</a><a href="#contact">문의</a>
+      <a href="#home">홈</a><a href="#solutions">솔루션</a><a href="#projects">포트폴리오</a>
+      <a href="#process">시공 프로세스</a><a href="#products">장비·제품</a>
+      <a href="#services">교육·오퍼레이션</a><a href="#support">A/S·보증</a>
+      <a href="#downloads">리소스</a><a href="#contact">문의</a>
     </nav>
     <a class="btn" href="#contact">견적/컨설팅</a>
   </div>
 </header>
 
+<!-- Hero -->
 <section id="home" class="hero">
-  <svg class="bg-fallback" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0b0b0f"/><stop offset="100%" stop-color="#111827"/></linearGradient>
-      <radialGradient id="beamL" cx="0.28" cy="-0.1" r="0.9"><stop offset="0%" stop-color="#7c3aed" stop-opacity="0.95"/><stop offset="70%" stop-color="#111827" stop-opacity="0"/></radialGradient>
-      <radialGradient id="beamR" cx="0.78" cy="-0.1" r="0.95"><stop offset="0%" stop-color="#2563eb" stop-opacity="0.9"/><stop offset="70%" stop-color="#111827" stop-opacity="0"/></radialGradient>
-    </defs>
-    <rect width="1440" height="900" fill="url(#bg)"/>
-    <ellipse cx="420" cy="-140" rx="620" ry="520" fill="url(#beamL)"/>
-    <ellipse cx="980" cy="-160" rx="680" ry="560" fill="url(#beamR)"/>
-  </svg>
-  <img src="hero.jpg" alt="히어로 사진" class="photo" onerror="this.remove()">
+  <img src="hero.jpg" alt="히어로 사진" class="photo">
   <div class="overlay"></div>
   <div class="center container">
     <div>
       <h1>빛을 설계하다, 무대를 완성하다.</h1>
-      <p class="muted" style="font-size:18px;margin-top:10px">공연·방송·클럽·교회 — 설계→시공→교육→<b>A/S 2년</b> 원스톱</p>
-      <div style="margin-top:18px"><a class="btn" href="#contact">프로젝트 상담</a> <a class="btn-ghost" href="#projects">포트폴리오 보기</a></div>
+      <p class="muted" style="font-size:18px;margin-top:10px">
+        공연·방송·클럽·교회 — 설계→시공→교육→<b>A/S 2년</b> 원스톱
+      </p>
+      <div style="margin-top:18px">
+        <a class="btn" href="#contact">프로젝트 상담</a>
+        <a class="btn-ghost" href="#projects">포트폴리오 보기</a>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- Solutions -->
 <section id="solutions" class="section" style="background:linear-gradient(#0b0b0f,#000)">
   <div class="container">
     <h2>솔루션</h2>
     <div class="grid g-3">
-
-      <!-- 기존 솔루션 카드 (그대로) -->
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
-        <img src="solution-club.jpg" alt="EDM 공연장 조명" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:relative;z-index:2;padding:20px;">
-          <h3>클럽 · 라이브홀</h3>
-          <p class="muted" style="color:#f3f4f6;">다이내믹 빔/픽셀 · FX 동기화 · 네트워크 이중화</p>
-        </div>
+      <!-- 카드 공통 구조: 이미지 절대배치 + 오버레이 + 텍스트 -->
+      <div class="card" style="padding:0">
+        <img src="solution-club.jpg" alt="클럽/라이브홀">
+        <div class="overlay"></div>
+        <div style="padding:20px;"><h3>클럽 · 라이브홀</h3><p class="muted" style="color:#f3f4f6">EDM·라이브 환경 최적 연출, 네트워크 안정성 강화</p></div>
       </div>
-
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
-        <img src="solution-church.jpg" alt="교회/예배당 조명" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:relative;z-index:2;padding:20px;">
-          <h3>교회 · HOW</h3>
-          <p class="muted" style="color:#f3f4f6;">눈부심 억제 · 색온도 일관성 · 생방송 대응</p>
-        </div>
+      <div class="card" style="padding:0">
+        <img src="solution-church.jpg" alt="교회/HOW">
+        <div class="overlay"></div>
+        <div style="padding:20px;"><h3>교회 · HOW</h3><p class="muted" style="color:#f3f4f6">예배 및 중계환경 조명 설계, 방송용 색온도 조정</p></div>
       </div>
-
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
-        <img src="solution-arena.jpg" alt="대규모 콘서트 LED 무대" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:relative;z-index:2;padding:20px;">
-          <h3>공연장 · 아레나</h3>
-          <p class="muted" style="color:#f3f4f6;">대규모 회로/하중 설계 · 타임코드 쇼</p>
-        </div>
+      <div class="card" style="padding:0">
+        <img src="solution-arena.jpg" alt="공연장/아레나">
+        <div class="overlay"></div>
+        <div style="padding:20px;"><h3>공연장 · 아레나</h3><p class="muted" style="color:#f3f4f6">대규모 무대 구조물 시공, 타임코드 쇼 운영</p></div>
       </div>
-
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
-        <img src="solution-conference.jpg" alt="기업 행사 조명" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:relative;z-index:2;padding:20px;">
-          <h3>기업행사 · 컨퍼런스</h3>
-          <p class="muted" style="color:#f3f4f6;">브랜딩 컬러 재현 · 신속 설치/철거</p>
-        </div>
+      <div class="card" style="padding:0">
+        <img src="solution-studio.jpg" alt="방송/스튜디오">
+        <div class="overlay"></div>
+        <div style="padding:20px;"><h3>방송 · 스튜디오</h3><p class="muted" style="color:#f3f4f6">카메라 친화 조명, 방송용 Flicker-Free 시스템</p></div>
       </div>
-
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
-        <img src="solution-studio.jpg" alt="방송국 스튜디오 조명" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:relative;z-index:2;padding:20px;">
-          <h3>방송 · 스튜디오</h3>
-          <p class="muted" style="color:#f3f4f6;">플리커 프리 · 카메라 매칭 · 콘솔 연동</p>
-        </div>
+      <div class="card" style="padding:0">
+        <img src="solution-system.jpg" alt="시스템 통합">
+        <div class="overlay"></div>
+        <div style="padding:20px;"><h3>시스템 통합</h3><p class="muted" style="color:#f3f4f6">조명·음향·영상 통합 제어 시스템 설계 및 구축</p></div>
       </div>
-
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
-        <img src="solution-rental.jpg" alt="장비 렌탈 세팅" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1;"></div>
-        <div style="position:relative;z-index:2;padding:20px;">
-          <h3>단기 렌탈</h3>
-          <p class="muted" style="color:#f3f4f6;">행사/프로모션 장비 패키지 및 운영</p>
-        </div>
+      <div class="card" style="padding:0">
+        <img src="solution-showcontrol.jpg" alt="쇼 컨트롤 디자인">
+        <div class="overlay"></div>
+        <div style="padding:20px;"><h3>쇼 컨트롤 디자인</h3><p class="muted" style="color:#f3f4f6">타임코드 기반 쇼 프로그래밍 · 픽셀 매핑 · 콘솔 연출 지원</p></div>
       </div>
-
     </div>
   </div>
 </section>
 
+<!-- Portfolio -->
 <section id="projects" class="section--alt" aria-labelledby="sec-proj">
   <div class="container">
     <h2 id="sec-proj">포트폴리오</h2>
     <div class="grid g-3">
-
-      <!-- ⬇️ 원래 비율/크기 표시(요청 반영) -->
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);">
-        <img src="arena.jpg" alt="서울 아레나 무대" style="width:100%;height:auto;display:block;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);">
+        <img src="arena.jpg" alt="서울 아레나 무대" style="width:100%;height:auto;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.35);"></div>
         <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
           <h3 style="margin:0 0 6px">서울 아레나</h3>
           <div class="muted">1,280기 · 유니버스24 · 조도 평균 1200lx</div>
         </div>
       </div>
-
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);">
-        <img src="club.jpg" alt="메가클럽 X 무대" style="width:100%;height:auto;display:block;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);">
+        <img src="club.jpg" alt="메가클럽 X 무대" style="width:100%;height:auto;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.35);"></div>
         <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
           <h3 style="margin:0 0 6px">메가클럽 X</h3>
           <div class="muted">픽셀 30,000노드 · 타임코드 쇼</div>
         </div>
       </div>
-
-      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.6);">
-        <img src="church.jpg" alt="교회 조명" style="width:100%;height:auto;display:block;">
-        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);"></div>
+      <div class="card" style="position:relative;overflow:hidden;padding:0;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);">
+        <img src="church.jpg" alt="교회 조명" style="width:100%;height:auto;">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.35);"></div>
         <div style="position:absolute;bottom:0;left:0;right:0;padding:20px;">
           <h3 style="margin:0 0 6px">○○교회</h3>
           <div class="muted">방송/현장 겸용 · 4300K</div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
+<!-- Process -->
 <section id="process" class="section">
   <div class="container">
     <h2>시공 프로세스</h2>
@@ -181,13 +219,13 @@
   </div>
 </section>
 
+<!-- Products -->
 <section id="products" class="section">
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between">
       <h2>장비 · 제품</h2><a class="btn-ghost" href="#downloads">카탈로그</a>
     </div>
     <div class="grid g-3" style="margin-top:16px">
-      <!-- ⬇️ 장비·제품 이미지 삽입 가능(요청 반영) -->
       <div class="card" style="padding:0;overflow:hidden">
         <img src="product-moving.jpg" alt="무빙라이트 (Beam/Spot/Wash)" style="width:100%;height:220px;object-fit:cover;border-bottom:1px solid var(--line);">
         <div style="padding:20px"><h3>무빙라이트</h3><ul class="muted"><li>Beam/Spot/Wash</li><li>Art-Net/sACN/DMX</li><li>16bit 디밍</li></ul></div>
@@ -196,7 +234,7 @@
         <img src="product-pixel.jpg" alt="LED 픽셀 시스템 (바/패널/튜브)" style="width:100%;height:220px;object-fit:cover;border-bottom:1px solid var(--line);">
         <div style="padding:20px"><h3>LED 픽셀 시스템</h3><ul class="muted"><li>픽셀바/패널/튜브</li><li>매핑 소프트웨어</li><li>KC 인증 모델</li></ul></div>
       </div>
-      <div class="card" style="padding:0;overflow:hidden">
+        <div class="card" style="padding:0;overflow:hidden">
         <img src="product-fx.jpg" alt="특수효과 장비 (스트로브/레이저/헤이저/로우포그/콜드스파크)" style="width:100%;height:220px;object-fit:cover;border-bottom:1px solid var(--line);">
         <div style="padding:20px"><h3>특수효과 장비</h3><ul class="muted"><li>스트로브/레이저</li><li>헤이저/로우포그</li><li>CO₂/콜드스파크</li></ul></div>
       </div>
@@ -204,6 +242,7 @@
   </div>
 </section>
 
+<!-- Services -->
 <section id="services" class="section">
   <div class="container">
     <h2>서비스 & 교육</h2>
@@ -217,6 +256,7 @@
   </div>
 </section>
 
+<!-- Support -->
 <section id="support" class="section" style="background:#0b0b0f">
   <div class="container">
     <h2>A/S 2년 보증</h2>
@@ -228,6 +268,7 @@
   </div>
 </section>
 
+<!-- Downloads -->
 <section id="downloads" class="section">
   <div class="container">
     <h2>자료실</h2>
@@ -239,6 +280,7 @@
   </div>
 </section>
 
+<!-- Contact -->
 <section id="contact" class="section" style="background:#0b0b0f">
   <div class="container">
     <h2>문의하기</h2>
@@ -255,6 +297,7 @@
   </div>
 </section>
 
+<!-- Footer -->
 <footer>
   <div class="container" style="padding:36px 24px">
     <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:24px">
@@ -266,5 +309,31 @@
     <div class="muted" style="text-align:center;margin-top:16px;font-size:12px">© 2025 GRID LIGHT. All rights reserved.</div>
   </div>
 </footer>
+
+<!-- 📱 터치 지원: 카드 탭 토글 (hover 대체) -->
+<script>
+(function(){
+  const isTouch = matchMedia("(pointer: coarse)").matches;
+  if(!isTouch) return;
+  const cards = document.querySelectorAll("#solutions .card");
+  let active = null;
+  function deactivate(){ if(active){ active.classList.remove("active"); active=null; } }
+  cards.forEach(c=>{
+    c.addEventListener("click", (e)=>{
+      if(active && active!==c) active.classList.remove("active");
+      c.classList.toggle("active");
+      active = c.classList.contains("active") ? c : null;
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener("click", deactivate);
+})();
+</script>
+<style>
+/* 터치에서 active 시 hover와 동일한 효과 */
+#solutions .card.active img{transform:scale(1.03);filter:brightness(1)}
+#solutions .card.active .overlay{background:rgba(0,0,0,.30)}
+</style>
+
 </body>
 </html>
